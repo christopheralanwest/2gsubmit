@@ -1,0 +1,97 @@
+#
+# cm energy (in GeV)
+#
+ecm TEMPLATECME
+
+#
+# kinematic cuts
+#
+
+# photon pt (in GeV)
+ph1_ptmin TEMPLATEPTMIN1
+ph2_ptmin TEMPLATEPTMIN2
+# photon rapidity
+ph_eta_max TEMPLATEETAMAX
+ph1_eta_max TEMPLATEETA1MAX
+ph2_eta_max TEMPLATEETA2MAX
+ph1_eta_min TEMPLATEETA1MIN
+ph2_eta_min TEMPLATEETA2MIN
+crack_eta_min TEMPLATECRACKETAMIN
+crack_eta_max TEMPLATECRACKETAMAX
+# dR separation between the photons
+ph_deltaR_min 0.45
+# invariant mass cuts 
+# mgg_min should be *at least* 1 GeV. 
+# mgg_max can be even larger than 1TeV but calculation time will be increased
+mgg_min TEMPLATEMASSMIN
+mgg_max TEMPLATEMASSMAX
+
+#
+# isolation cuts: R0 and E0 (in GeV)
+#
+ph_iso_R0 TEMPLATEISOLCONE
+ph_iso_E0 TEMPLATEISOLVALUE
+
+#
+# output option
+#
+
+# save or not the histograms in ROOT format
+SaveRootHistos TEMPLATESAVEROOTHISTOS
+# save or not the ntuple with Mgg and the weight
+SaveRootNtuple TEMPLATESAVEROOTNTUPLES
+# save or not the histograms in TopDrawer format
+SaveTopdHistos TEMPLATESAVETOPHISTOS
+
+#histograms
+#format: hist [id] [var] [nbins] [min] [max] [LIN/LOG]
+hist 1 Mgg 100 0. 2000. LIN
+hist 2 PT1 100 0. 2000. LIN
+hist 3 PT2 100 0. 2000. LIN
+hist 4 PTGG 100 0. 2000. LIN
+hist 5 PHI1 72 -3.15 3.15 LIN
+hist 6 PHI2 72 -3.15 3.15 LIN
+hist 7 PHIGG 72 0. 3.15 LIN
+hist 8 ETA1 50 -2.5 2.5 LIN
+hist 9 ETA2 50 -2.5 2.5 LIN
+hist 10 ETAGG 100 -5. 5. LIN
+hist 11 CosP 20 -1. 1. LIN
+hist 12 CosA 20 -1. 1. LIN
+hist 13 Mgg 100 0. 1000. LIN
+hist 14 Mgg 100 1000. 2000. LIN
+hist 15 Mgg 100 2000. 3000. LIN
+hist 16 Mgg 100 3000. 4000. LIN
+
+
+#
+# 2gNNLO settings
+#
+# contributions to switch on/off (1/0)
+## BORN
+iifborn TEMPLATEBORNON
+## NLO
+iifnnlo TEMPLATENLOON
+## NNLO
+iinnlo TEMPLATENNLOON
+# run option
+# 1: START
+# 2: CONTINUE
+# 3: RESTART WITH PREVIOUS GRIDS
+i0 TEMPLATERUNOPTIONBORN
+ifnn TEMPLATERUNOPTIONNLO
+inn TEMPLATERUNOPTIONNNLO
+# Number of iterations 
+n0 -50
+#fnn0 -50
+fnn0 -25
+#nn0 -300
+nn0 -25
+# Number of calls per iteration
+ncl0 10000000
+fnncl 1000000
+nncl 1000000
+
+renscalefactor TEMPLATERENSCALEFACTOR
+facscalefactor TEMPLATEFACSCALEFACTOR
+
+
