@@ -12,7 +12,13 @@ echo "Using LHAPDF from location " ${LHAPDF}
 # get 2gNNLO v2.1
 if [ !  -e  ${DIRNAME}  ]
 then
+    echo "Downloading 2gNNLO"
     wget http://www.physik.uzh.ch/~lcieri/2gNNLO_2.1.tar.gz
+fi
+
+if [  -e  ${DIRNAME}  ]
+then
+    rm -rf ${DIRNAME}
     tar xvf 2gNNLO_2.1.tar.gz
 fi
 

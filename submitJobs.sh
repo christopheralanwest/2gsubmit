@@ -7,7 +7,6 @@ location='CERN';
 regionsArray='BE BB';
 #contribsArray='BORN';
 contribsArray='BORN NLO NNLO';
-#contribsArray='NNLO';
 renfacscalesArray='R2F2 R1F1 R0p5F0p5';
 #renfacscalesArray='R2F2 R0p5F0p5';
 #renfacscalesArray='R1F1';
@@ -21,11 +20,6 @@ massbinsArray='Mass0p23To2TeV';
 DIRNAME="2gNNLO_2.1"
 
 ./setup.sh
-mkdir -p SUBMITDIR
-rm -rf SUBMITDIR/*
-cd SUBMITDIR;
-cp -r $basedir/$DIRNAME .
-cd $DIRNAME
 
 # default queue names 
 mainQueue='main'
@@ -50,6 +44,12 @@ do
 	do
 	    for j in $contribsArray;
 	    do
+		cd $basedir
+		mkdir -p SUBMITDIR
+		rm -rf SUBMITDIR/*
+		cd SUBMITDIR;
+		cp -r $basedir/$DIRNAME .
+		cd $DIRNAME
 		echo $i"_"$j"_"$k"_"$m;
 		echo category $i"_"$j"_"$k"_"$m"_13TeV";
 		$basedir/createConfigs.sh $basedir/input.txt.TEMPLATE $i"_"$j"_"$k"_"$m"_13TeV" START
@@ -58,9 +58,9 @@ do
                 if [[ "$j" == *"BORN"* ]]; then
                     sed -i 's/MSTW2008lo68cl.LHgrid/CT10.LHgrid/g' "src/pdf_lha.f"
                 elif [[ "$j" == *"NNLO"* ]]; then
-                    sed -i 's/MSTW2008lo68cl.LHgrid/CT10nlo.LHgrid/g' "src/pdf_lha.f"
-                else
                     sed -i 's/MSTW2008lo68cl.LHgrid/CT10nnlo.LHgrid/g' "src/pdf_lha.f"
+                else
+                    sed -i 's/MSTW2008lo68cl.LHgrid/CT10nlo.LHgrid/g' "src/pdf_lha.f"
                 fi
 		echo "Current directory: "`pwd`
 		make clean;

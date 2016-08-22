@@ -81,11 +81,11 @@ i0 TEMPLATERUNOPTIONBORN
 ifnn TEMPLATERUNOPTIONNLO
 inn TEMPLATERUNOPTIONNNLO
 # Number of iterations 
-n0 -50
-#fnn0 -50
-fnn0 -25
-#nn0 -300
-nn0 -25
+n0 50
+#fnn0 50
+fnn0 25
+#nn0 300
+nn0 25
 # Number of calls per iteration
 ncl0 10000000
 fnncl 1000000
