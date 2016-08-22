@@ -55,7 +55,7 @@ hist 7 PHIGG 72 0. 3.15 LIN
 hist 8 ETA1 50 -2.5 2.5 LIN
 hist 9 ETA2 50 -2.5 2.5 LIN
 hist 10 ETAGG 100 -5. 5. LIN
-hist 11 CosP 20 -1. 1. LIN
+hist 11 CosP 20 0. 1. LIN
 hist 12 CosA 20 -1. 1. LIN
 hist 13 Mgg 100 0. 1000. LIN
 hist 14 Mgg 100 1000. 2000. LIN
