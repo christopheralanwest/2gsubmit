@@ -89,7 +89,7 @@ nn0 25
 # Number of calls per iteration
 ncl0 10000000
 fnncl 1000000
-nncl 1000000
+nncl 2000000
 
 renscalefactor TEMPLATERENSCALEFACTOR
 facscalefactor TEMPLATEFACSCALEFACTOR
