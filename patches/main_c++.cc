@@ -21,3 +21,5 @@
 >   else if (var=="PHIGG") return "|#Delta#phi|";
 >   else if (var=="CosP") return "cos#theta*";
 >   else if (var=="CosA") return "cos#theta*";
+156a163
+> 	    hists[idhist]->Sumw2();
