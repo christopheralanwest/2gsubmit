@@ -51,7 +51,7 @@ saverootntuples=0
 savetopdhistos=1
 renscalefactor=1.0
 facscalefactor=1.0
-
+pdfname="MSTW2008nnlo68cl.LHgrid"
 
 if [[ "$category" == *"BB"* ]]; then
     eta1max=1.5
@@ -158,6 +158,14 @@ if [[ "$category" == *"Mass0p23To2TeV"* ]]; then
     if [[ "$category" == *"BE"* ]]; then
 	massmin=320.0
     fi
+    # use same PDF that is used in the Sherpa sample
+    if [[ "$category" == *"BORN"* ]]; then
+	pdfname="CT10.LHgrid"
+    elif [[ "$category" == *"_NLO"* ]]; then
+	pdfname="CT10nlo.LHgrid"
+    elif  [[ "$category" == *"_NNLO"* ]]; then
+	pdfname="CT10nnlo.LHgrid"
+    fi
 fi
 
 
@@ -242,3 +250,4 @@ sed -i s/TEMPLATERUNOPTIONNLO/$optionnloon/g input.txt
 sed -i s/TEMPLATERUNOPTIONNNLO/$optionnnloon/g input.txt
 sed -i s/TEMPLATERENSCALEFACTOR/$renscalefactor/g input.txt
 sed -i s/TEMPLATEFACSCALEFACTOR/$facscalefactor/g input.txt
+sed -i s/PDFNAME/$pdfname/g input.txt

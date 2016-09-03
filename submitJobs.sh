@@ -3,9 +3,8 @@
 basedir=`pwd`
 location='CERN'
 #regionsArray='PRL'
-regionsArray='BB'
-#regionsArray='BE BB'
-#contribsArray='BORN'
+#regionsArray='BB'
+regionsArray='BB BE'
 contribsArray='BORN NLO NNLO'
 #renfacscalesArray='R2F2 R1F1 R0p5F0p5'
 #renfacscalesArray='R2F2 R0p5F0p5'
@@ -54,23 +53,15 @@ do
 		echo category $i"_"$j"_"$k"_"$m"_13TeV"
 		$basedir/createConfigs.sh $basedir/input.txt.TEMPLATE $i"_"$j"_"$k"_"$m"_13TeV" START
 		cp $basedir/SUBMITDIR/$DIRNAME/input.txt bin
-                # hack to change PDF
-                if [[ "$j" == *"BORN"* ]]; then
-                    sed -i 's/MSTW2008lo68cl.LHgrid/CT10.LHgrid/g' "src/pdf_lha.f"
-                elif [[ "$j" == *"NNLO"* ]]; then
-                    sed -i 's/MSTW2008lo68cl.LHgrid/CT10nnlo.LHgrid/g' "src/pdf_lha.f"
-                else
-                    sed -i 's/MSTW2008lo68cl.LHgrid/CT10nlo.LHgrid/g' "src/pdf_lha.f"
-                fi
 		echo "Current directory: "`pwd`
 		make clean
 		make install
 		if [[ "$j" == *"BORN"* ]]; then
 		    numjobs=10
 		elif [[ "$j" == *"NNLO"* ]]; then
-		    numjobs=100
+		    numjobs=10
 		else
-		    numjobs=50
+		    numjobs=10
 		fi
 		echo $numjobs "jobs to be submitted for this task"
 		mkdir -p $basedir/JOBSUBMISSION/$DIRDATE/$i"_"$j"_"$k"_"$m"_13TeV"
@@ -84,7 +75,8 @@ do
 		    cd $basedir/JOBSUBMISSION/$DIRDATE/$i"_"$j"_"$k"_"$m"_13TeV"/"Job"$l/bin
 		    if [[ "$j" == *"NNLO"* ]]; then
 			echo "Submitting to queue "$longQueue
-			bsub -q $longQueue -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
+			## require a cpuf>4 to avoid getting stuck on a crummy host
+			bsub -q $longQueue -R "cpuf>4" -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
 		    else
 			echo "Submitting to queue "$mainQueue
 			bsub -q $mainQueue -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
