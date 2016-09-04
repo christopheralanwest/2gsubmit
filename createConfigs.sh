@@ -250,4 +250,4 @@ sed -i s/TEMPLATERUNOPTIONNLO/$optionnloon/g input.txt
 sed -i s/TEMPLATERUNOPTIONNNLO/$optionnnloon/g input.txt
 sed -i s/TEMPLATERENSCALEFACTOR/$renscalefactor/g input.txt
 sed -i s/TEMPLATEFACSCALEFACTOR/$facscalefactor/g input.txt
-sed -i s/PDFNAME/$pdfname/g input.txt
+sed -i s/TEMPLATEPDFNAME/$pdfname/g input.txt

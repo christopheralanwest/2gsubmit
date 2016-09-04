@@ -26,4 +26,4 @@
 >     std::cout << "Renormalization and factorization scale factors (to compute uncertainties) " << std::endl;
 >     std::cout << "renscalefactor: "<< renscalefactor << std::endl;
 >     std::cout << "facscalefactor: "<< facscalefactor << std::endl;
->     std::cout << "PDFname: " << PDFname << std::endl;
+>     std::cout << "PDFname: " << pdf_.PDFname << std::endl;
