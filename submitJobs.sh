@@ -6,9 +6,9 @@ location='CERN'
 #regionsArray='BB'
 regionsArray='BB BE'
 contribsArray='BORN NLO NNLO'
-#renfacscalesArray='R2F2 R1F1 R0p5F0p5'
+renfacscalesArray='R1F1 R2F2 R0p5F0p5'
 #renfacscalesArray='R2F2 R0p5F0p5'
-renfacscalesArray='R1F1'
+#renfacscalesArray='R1F1'
 massbinsArray='Mass0p23To2TeV'
 #massbinsArray='Mass0p02To0p2TeV'
 #massbinsArray='Mass0p2To2TeV'
@@ -33,7 +33,7 @@ mkdir -p $basedir/JOBSUBMISSION
 DIRDATE=$(date +%F-%T | sed 's/:/-/g')
 mkdir -p $basedir/JOBSUBMISSION/$DIRDATE
 
-numjobs=50
+numjobs=10
 
 for k in $renfacscalesArray
 do
@@ -56,10 +56,8 @@ do
 		echo "Current directory: "`pwd`
 		make clean
 		make install
-		if [[ "$j" == *"BORN"* ]]; then
-		    numjobs=10
-		elif [[ "$j" == *"NNLO"* ]]; then
-		    numjobs=10
+		if [[ "$j" == *"NNLO"* ]]; then
+		    numjobs=50
 		else
 		    numjobs=10
 		fi
@@ -75,8 +73,12 @@ do
 		    cd $basedir/JOBSUBMISSION/$DIRDATE/$i"_"$j"_"$k"_"$m"_13TeV"/"Job"$l/bin
 		    if [[ "$j" == *"NNLO"* ]]; then
 			echo "Submitting to queue "$longQueue
+			if [[ "$k" == "R1F1" ]]; then
 			## require a cpuf>4 to avoid getting stuck on a crummy host
-			bsub -q $longQueue -R "cpuf>4" -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
+			    bsub -q $longQueue -R "cpuf>4" -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
+			else
+			    bsub -q $longQueue -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
+			fi
 		    else
 			echo "Submitting to queue "$mainQueue
 			bsub -q $mainQueue -J "job"$l"_"$i"_"$j"_"$k"_13TeV" -o output.txt `pwd`/run.sh
